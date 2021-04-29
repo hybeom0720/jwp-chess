@@ -56,10 +56,11 @@ public class ChessController {
         return "play";
     }
 
-    @PostMapping("/game/{gameName}/move")
+    @PostMapping("/game/{name}/move")
     @ResponseBody
     public ResponseEntity<MoveResponseDto> move(@PathVariable String name,
         @RequestBody MoveDto moveDto) {
+
         String command = makeMoveCmd(moveDto.getSource(), moveDto.getTarget());
         springChessService.move(name, command, new Commands(command));
         MoveResponseDto moveResponseDto = new MoveResponseDto(springChessService
